@@ -28,7 +28,7 @@ app.configure(function(){
     app.use(function(request, response, next){
         response.show = function (name, context) {
             var c = _.extend(context || {}, {
-                title: 'Remarkably meme chats | Awesome Memes',
+                title: 'Remarkable meme chats | Awesome Memes',
                 request: request,
                 background_images: [
                     {name: 'Sucessful kid', url: bg_image_url('baby')}
