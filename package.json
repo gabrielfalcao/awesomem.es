@@ -1,0 +1,16 @@
+{
+    "name": "gagchat"
+  , "version": "0.0.1"
+  , "dependencies": {
+      "redis": ">= 0.7.1"
+    , "express": ">= 2.5.0"
+    , "should": ">= 0.3.2"
+    , "canvas": "https://github.com/gabrielfalcao/node-canvas-heroku/tarball/master"
+    , "socket.io": ">= 0.8.7"
+    , "jade": ">= 0.17.0"
+    , "less": ">= 1.1.5"
+    , "underscore": ">= 1.2.2"
+    , "connect-redis": ">= 1.2.0"
+    , "redis-url": ">= 0.1.0"
+  }
+}

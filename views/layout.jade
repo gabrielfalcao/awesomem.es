@@ -1,0 +1,62 @@
+!!! 5
+html
+  head
+    title= title
+    meta(name="author", content="Gabriel Falcão")
+    meta(name="description", content="Awesomemes is a chat but instead of text, people talk to each other through memes")
+    meta(name="keywords", content="meme, memes, generation, generate, dynamic image")
+    //if lt IE 9
+      script(src="http://html5shim.googlecode.com/svn/trunk/html5.js")
+
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css', type='text/css')
+    link(rel='stylesheet', href='/stylesheets/general.css', type='text/css')
+    link(rel='stylesheet', href='/stylesheets/jquery.jflow.css', type='text/css')
+
+    script(type="text/javascript", src="/socket.io/socket.io.js")
+    script(type="text/javascript", src="/javascripts/jquery-1.6.2.min.js")
+    script(type="text/javascript", src="/javascripts/jquery.scrollTo-min.js")
+    script(type="text/javascript", src="/javascripts/jquery.jflow.js")
+    script(type="text/javascript", src="/javascripts/bootstrap-dropdown.js")
+    script(type="text/javascript", src="/javascripts/main.js")
+
+  body
+    .topbar(data-dropdown="dropdown")
+      .topbar-inner
+        .fill
+          .container
+            h3
+              a.brand(href="#")
+                span.awesomem awesomem
+                span.es es
+
+            ul.nav
+              li.active: a(href="#") Fresh
+              li: a(href="#") Most repeated
+            ul.nav.secondary-nav
+              li.dropdown
+                a.dropdown-toggle(href="#") gabrielfalcao
+                ul.dropdown-menu
+                  li.active: a(href="#") my history
+                  li: a(href="#") Hot memes
+                  li.divider
+                  li: a(href="#") logout
+
+    .bottombar
+      .fill
+        .container
+          .form
+            form#chat-form(method="post")
+              input#msg(name="msg", type="text", tabindex="1")
+            .bg-navigation.left
+              a.previous(href="#") &lt;
+            .bg-navigation.right
+              a.next(href="#") &gt;
+
+            #background-images
+              ul
+                - each image in background_images
+                  li.bg-image
+                    a(href="#" + image.url)
+                      img(src=image.url, alt=image.name + " meme background image")
+
+    != body

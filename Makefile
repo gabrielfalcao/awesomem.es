@@ -1,0 +1,12 @@
+deploy:
+	-heroku destroy --confirm awesomemes
+	-heroku create awesomemes --stack cedar
+	-heroku addons:add redistogo:nano
+	-heroku addons:add custom_domains:basic
+	-heroku addons:add zerigo_dns:basic
+	-heroku domains:clear
+	-heroku domains:add awesomem.es
+	-heroku domains:add www.awesomem.es
+	-heroku config:add -s LD_PRELOAD='/app/node_modules/canvas/cairo/libcairo.so /app/node_modules/canvas/lib/libpixman-1.so.0 /app/node_modules/canvas/lib/libfreetype.so.6' --app awesomemes
+	-heroku config:add -s LD_LIBRARY_PATH'=/app/node_modules/canvas/cairo' --app awesomemes
+	-git push heroku master
