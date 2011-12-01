@@ -1,4 +1,5 @@
 deploy:
+	-git remote rm heroku
 	-heroku destroy --confirm awesomemes
 	-heroku create awesomemes --stack cedar
 	-heroku addons:add redistogo:nano
