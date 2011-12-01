@@ -13,7 +13,6 @@ body {
   position: absolute;
   height: 90px;
   width: 20px;
-  z-index: 8000;
   &.right {
     right: 0;
   }
@@ -88,7 +87,6 @@ h3 {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 9000;
   overflow: visible;
   .form {
     position: relative;
@@ -100,10 +98,12 @@ h3 {
       margin: 0 0 6px 0;
     }
     #msg {
-      margin-top: 10px;
+      margin: 7px 0 7px 0;
       font-size: 22px;
       color: #black;
       width: 960px;
+      height: 25px;
+      position: relative;
     }
   }
   // gradient is applied to it's own element because overflow visible is not honored by ie when filter is present
@@ -128,3 +128,36 @@ h3 {
     margin-right: 20px;
   }
 }
+
+.popover {
+  .inner {
+    .content {
+      color: #666;
+      p {
+        &.big {
+          padding: 10px 5px 10px 0;
+          font-size: 14px;
+        }
+        &.emoticon {
+          font-size: 36px;
+          text-align: center;
+          padding-bottom: 10px;
+        }
+      }
+      strong {
+        color: #333;
+      }
+    }
+  }
+
+  .bad {
+    font-weight: bold;
+    color: #844;
+  }
+
+  .good {
+    font-weight: bold;
+    color: #484;
+  }
+}
+

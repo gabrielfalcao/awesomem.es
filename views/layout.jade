@@ -15,11 +15,14 @@ html
     script(type="text/javascript", src="/javascripts/jquery-1.6.2.min.js")
     script(type="text/javascript", src="/javascripts/jquery.scrollTo-min.js")
     script(type="text/javascript", src="/javascripts/jquery.jflow.js")
+    script(type="text/javascript", src="/javascripts/bootstrap-twipsy.js")
     script(type="text/javascript", src="/javascripts/bootstrap-dropdown.js")
+    script(type="text/javascript", src="/javascripts/bootstrap-popover.js")
+    script(type="text/javascript", src="/javascripts/bootstrap-modal.js")
     script(type="text/javascript", src="/javascripts/main.js")
 
   body
-    .topbar(data-dropdown="dropdown")
+    #topbar.topbar(data-dropdown="dropdown")
       .topbar-inner
         .fill
           .container
@@ -32,10 +35,10 @@ html
               li.active: a(href="#") Fresh
               li: a(href="#") Most repeated
             ul.nav.secondary-nav
-              li.dropdown
+              li.dropdown(data-dropdown="dropdown")
                 a.dropdown-toggle(href="#") gabrielfalcao
                 ul.dropdown-menu
-                  li.active: a(href="#") my history
+                  li: a(href="#") my history
                   li: a(href="#") Hot memes
                   li.divider
                   li: a(href="#") logout
@@ -44,8 +47,7 @@ html
       .fill
         .container
           .form
-            form#chat-form(method="post")
-              input#msg(name="msg", type="text", tabindex="1")
+            input#msg(name="msg", type="text", tabindex="1")
             .bg-navigation.left
               a.previous(href="#") &lt;
             .bg-navigation.right
