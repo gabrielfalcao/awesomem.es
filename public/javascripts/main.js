@@ -6,7 +6,7 @@ $(function(){
         html: true,
         offset: 20
     }).keydown(function(e){
-        if (e.keyCode >= 48) {
+        if ((e.keyCode >= 48) || (e.keyCode == 13)) {
             $(this).popover("hide");
             $(".popover").remove();
         }
