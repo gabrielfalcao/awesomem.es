@@ -101,23 +101,15 @@ io.sockets.on('connection', function (socket) {
     socket.emit('connected');
 });
 function render_meme(background_name, top_text, bottom_text, request, response) {
-
-    var sha1 = crypto.createHash("sha1");
     var data = {
         top_text: top_text,
         bottom_text: bottom_text,
     };
-    console.log(data)
     if (!data.top_text && !data.bottom_text) {
         return;
     }
     var top_text = data.top_text || "";
     var bottom_text = data.bottom_text || "";
-    sha1.update(top_text);
-    sha1.update(bottom_text);
-
-    var path = '/public/images/' + sha1.digest('hex') + '.png';
-    var destination = __dirname + path;
 
     fs.readFile(background_name, function (err, raw){
         var image = new Canvas.Image();
@@ -147,7 +139,12 @@ function render_meme(background_name, top_text, bottom_text, request, response) 
             ctx.strokeText(str, 10, base_bottom + (40 * (index + 1)));
             ctx.fillText(str, 10, base_bottom + (40 * (index + 1)));
         });
-        response.send(canvas.toBuffer(), { 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=31536000' })
+
+        response.send(canvas.toBuffer(), {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'public, max-age=31536000'
+        });
+
     });
 }
 app.listen(process.env.PORT || 8000);
