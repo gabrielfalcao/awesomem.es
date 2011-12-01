@@ -2106,3 +2106,15 @@ h3 .brand span.es {
   background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
   background-image: linear-gradient(top, #eeeeee, #cccccc);
 }
+#timeline {
+  height: 400px;
+  padding: 0;
+  margin: 50px 0 0 50px;
+  overflow: visible;
+}
+#timeline li {
+  list-style: none;
+  list-style-type: none;
+  float: left;
+  margin-right: 20px;
+}

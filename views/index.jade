@@ -1,0 +1,6 @@
+.container
+  .row
+    .span16
+      ul#timeline
+        - each image in background_images
+          li: img(src=image.url.replace('/images/bg/mini/', '/img/').replace('.jpg', '/this thing;actually works.png'))
