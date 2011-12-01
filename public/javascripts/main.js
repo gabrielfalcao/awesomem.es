@@ -59,7 +59,7 @@ $(function(){
                     .attr("data-original-title", 'The top text is empty')
                     .attr("data-content",
                           "<p class='big good'>Your message should look like this:</p><pre>some text;" + example_last + "</pre>" +
-                          "<p class='big bad'>Not like this:</p><pre>;" + example_last + "</pre>"
+                          "<p class='big bad'>Not like this:</p><pre>;</pre>"
                          )
                     .popover("show");
 
