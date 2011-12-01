@@ -6,15 +6,19 @@ fs = require('fs'),
 path = require('path'),
 crypto = require('crypto'),
 Canvas = require('canvas');
-
+if (process.env.REDISTOGO_URL) {
+    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+    var redis = require("redis").createClient(rtg.port, rtg.hostname);
+    redis.auth(rtg.auth.split(":")[1]);
+} else {
+    var redis = require("redis").createClient();
+}
 
 var app = express.createServer();
 var io = require('socket.io').listen(app);
 
 var jade = require('jade');
-function bg_image_url(name) {
-    return '/images/bg/mini/' + name + '.jpg';
-}
+
 app.configure(function(){
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -30,31 +34,7 @@ app.configure(function(){
             var c = _.extend(context || {}, {
                 title: 'Remarkable meme chats | Awesome Memes',
                 request: request,
-                background_images: [
-                    {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                  , {name: 'Philosoraptor', url: bg_image_url('philosoraptor')}
-                  , {name: 'Sucessful kid', url: bg_image_url('baby')}
-                ]
+                background_images: require('./background_images').list
             });
             response.render(name, c);
         }

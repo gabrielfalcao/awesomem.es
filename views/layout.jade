@@ -16,12 +16,12 @@ html
     script(type="text/javascript", src="/javascripts/jquery.scrollTo-min.js")
     script(type="text/javascript", src="/javascripts/jquery.jflow.js")
     script(type="text/javascript", src="/javascripts/bootstrap-twipsy.js")
-    script(type="text/javascript", src="/javascripts/bootstrap-dropdown.js")
     script(type="text/javascript", src="/javascripts/bootstrap-popover.js")
-    script(type="text/javascript", src="/javascripts/bootstrap-modal.js")
     script(type="text/javascript", src="/javascripts/main.js")
 
   body
+    #fade-in
+    #fade-out
     #topbar.topbar(data-dropdown="dropdown")
       .topbar-inner
         .fill
@@ -31,17 +31,9 @@ html
                 span.awesomem awesomem
                 span.es es
 
-            ul.nav
-              li.active: a(href="#") Fresh
-              li: a(href="#") Most repeated
-            ul.nav.secondary-nav
-              li.dropdown(data-dropdown="dropdown")
-                a.dropdown-toggle(href="#") gabrielfalcao
-                ul.dropdown-menu
-                  li: a(href="#") my history
-                  li: a(href="#") Hot memes
-                  li.divider
-                  li: a(href="#") logout
+            //-ul.nav
+            //-  li.active: a(href="#") Fresh
+            //-  li: a(href="#") Most repeated
 
     .bottombar
       .fill

@@ -1,5 +1,7 @@
 $(function(){
     var socket = io.connect();
+    $("#timeline").css("width", (($("#timeline li").length * 420)-440) + "px").fadeIn();
+
     $("#msg").popover({
         placement: "above",
         trigger: "manual",

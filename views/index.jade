@@ -1,0 +1,9 @@
+.container
+  ul#timeline
+    - each image in background_images
+      - if (/baby/.test(image.url))
+        - var suffix = encodeURIComponent('Did fall in love for you') + ';' + encodeURIComponent('Got inspired to hack') + '.png'
+        li: img(src=image.base_path + suffix)
+      - if (/raptor/.test(image.url))
+        - var suffix = encodeURIComponent('If I make some money') + ';' + encodeURIComponent('Am I an entrepeneur?') + '.png'
+        li: img(src=image.base_path + suffix)
