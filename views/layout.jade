@@ -15,22 +15,17 @@ html
     script(type="text/javascript", src="/javascripts/jquery-1.6.2.min.js")
     script(type="text/javascript", src="/javascripts/jquery.scrollTo-min.js")
     script(type="text/javascript", src="/javascripts/jquery.jflow.js")
+    script(type="text/javascript", src="/javascripts/bootstrap-modal.js")
+    script(type="text/javascript", src="/javascripts/bootstrap-dropdown.js")
     script(type="text/javascript", src="/javascripts/bootstrap-twipsy.js")
     script(type="text/javascript", src="/javascripts/bootstrap-popover.js")
     script(type="text/javascript", src="/javascripts/main.js")
-    script(type="text/javascript")
-      var _gaq = _gaq |[];
-       _gaq.push(['_setAccount', 'UA-1277640-8']);
-       _gaq.push(['_trackPageview']);
-       (function() {
-         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-       })();
 
   body
-    #fade-in
-    #fade-out
+    - if (request.session.user)
+      #fade-in
+      #fade-out
+
     #topbar.topbar(data-dropdown="dropdown")
       .topbar-inner
         .fill
@@ -43,22 +38,40 @@ html
             //-ul.nav
             //-  li.active: a(href="#") Fresh
             //-  li: a(href="#") Most repeated
+            - if (request.session.user)
+              ul.nav.secondary-nav
+                li.menu(data-dropdown="dropdown")
+                  a.menu.dropdown-toggle(href="#")= "Hello, " + request.session.user.name
+                  ul.dropdown-menu
+                    li: a(href="#") Your memes
+                    li: a(href="#") Your likes
+                    li.divider
+                    li
+                      a(href="/logout") logout
+                        img(src="/images/facebook-icon.png", style="float: right")
 
-    .bottombar
-      .fill
-        .container
-          .form
-            input#msg(name="msg", type="text", tabindex="1")
-            .bg-navigation.left
-              a.previous(href="#") &lt;
-            .bg-navigation.right
-              a.next(href="#") &gt;
+            - else
+              ul.nav.secondary-nav
+                li
+                  a(href="/auth/facebook") Login with
+                    img(src="/images/facebook-icon.png", style="float: right")
 
-            #background-images
-              ul
-                - each image in background_images
-                  li.bg-image
-                    a(href="#" + image.url)
-                      img(src=image.url, alt=image.name + " meme background image")
+            - if (request.session.user)
+              .bottombar
+                .fill
+                  .container
+                    .form
+                      input#msg(name="msg", type="text", tabindex="1")
+                      .bg-navigation.left
+                        a.previous(href="#") &lt;
+                      .bg-navigation.right
+                        a.next(href="#") &gt;
+
+                      #background-images
+                        ul
+                          - each image in background_images
+                            li.bg-image
+                              a(href="#" + image.url)
+                                img(src=image.url, alt=image.name + " meme background image")
 
     != body
