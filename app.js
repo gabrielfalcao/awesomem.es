@@ -35,7 +35,7 @@ everyauth.facebook
     .scope('user_about_me,user_photos,friends_photos,email,publish_stream')
     .findOrCreateUser(function(session, access_token, accessTokExtra, user) {
         redis.zscore("awes:authenticated-users", user.id, function(err, num){
-            var score = (num || 0) + 1;
+            var score = parseInt(num || 0) + 1;
             redis.zadd("awes:authenticated-users", score, user.id, function(err){
                 redis.hmset("awes:user:" + user.id, user, function(err) {
                     io.sockets.on('connection', function (socket) {
