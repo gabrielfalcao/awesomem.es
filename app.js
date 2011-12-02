@@ -10,12 +10,18 @@ everyauth = require('everyauth'),
 Canvas = require('canvas'),
 RedisStore = require('connect-redis')(express);
 
+var FACEBOOK_APP_ID, FACEBOOK_APP_SECRET;
+
 if (process.env.REDISTOGO_URL) {
     var rtg   = require("url").parse(process.env.REDISTOGO_URL);
     var redis = require("redis").createClient(rtg.port, rtg.hostname);
     redis.auth(rtg.auth.split(":")[1]);
+    FACEBOOK_APP_ID = "302858476405601";
+    FACEBOOK_APP_SECRET = "19c377a2f8635016bd5109d45d44a29a";
 } else {
     var redis = require("redis").createClient();
+    FACEBOOK_APP_ID = "195376883881120";
+    FACEBOOK_APP_SECRET = "71e3c97c56da2e71f83775aa131a1be8";
 }
 
 var app = express.createServer();
@@ -24,8 +30,8 @@ var io = require('socket.io').listen(app);
 var jade = require('jade');
 
 everyauth.facebook
-    .appId('195376883881120')
-    .appSecret('71e3c97c56da2e71f83775aa131a1be8')
+    .appId(FACEBOOK_APP_ID)
+    .appSecret(FACEBOOK_APP_SECRET)
     .scope('user_about_me,user_photos,friends_photos,email,publish_stream')
     .findOrCreateUser(function(session, access_token, accessTokExtra, user) {
         redis.zscore("awes:authenticated-users", user.id, function(err, num){
